@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="MainComments">
+<head>
+	<title>Comments execrcise</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="./controllers/Comments.js"></script>
+	<style type="text/css">
+		.avatar{
+			width: 30px;
+			height: 30px;
+			float: left;
+		}
+		.content {
+			float: right;
+		}
+		.comment{
+			width: 200px;
+		}
+	</style>
+</head>
+<body ng-controller="CommentsController as comments">
+	<form ng-submit="comments.addComment()">
+		<input type="email"
+			   placeholder="Email"
+			   ng-model="comments.newComment.email"
+			   required>
+		<br>
+		<input type="text"
+			   ng-model="comments.newComment.message"
+		 	   placeholder="Message">
+		<br>
+		<input type="submit"
+			   value="Submit">
+	</form>
+	<br>
+	<input type="text"
+		   placeholder="Filter"
+		   ng-model="searchText">
+	<ul ng-repeat="comment in comments.items | filter:searchText">
+		<div class="comment">
+			<div class="content">
+				<span>{{comment.email}}</span>
+				<div>{{comment.message}}</div>
+			</div>
+			<img class="avatar" ng-src="{{comment.avatar}}">
+		</div>
+		<br>
+	</ul>
+</body>
+</html>
